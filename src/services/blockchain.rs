@@ -1,4 +1,4 @@
-use crate::block::Block;
+use crate::models::block::Block;
 use crate::transaction::Transaction;
 
 #[derive(Debug)]
@@ -38,13 +38,7 @@ impl Blockchain {
     fn mine_block(&self, block: &mut Block) {
         while !block.hash.starts_with(&"0".repeat(self.difficulty as usize)) {
             block.nonce += 1;
-            block.hash = Block::calculate_hash(
-                block.index,
-                &block.previous_hash,
-                block.timestamp,
-                &block.transactions,
-                block.nonce,
-            );
+            block.hash = block.calculate_hash();
         }
         println!("Block mined: {}", block.hash);
     }
@@ -52,7 +46,7 @@ impl Blockchain {
     pub fn display(&self) {
         for block in &self.blocks {
             println!("----------------------------------");
-            block.display_colorful(); // Call the method here
+            block.display_colorful();
             println!("Transactions:");
             for transaction in &block.transactions {
                 println!("  - {}", transaction.details());

@@ -1,8 +1,8 @@
+mod models;
+mod services;
 mod transaction;
-mod block;
-mod blockchain;
 
-use blockchain::Blockchain;
+use services::blockchain::Blockchain;
 use transaction::Transaction;
 
 fn main() {
