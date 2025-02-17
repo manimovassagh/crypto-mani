@@ -1,0 +1,8 @@
+[package]
+name = "crypto-mani"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+sha2 = "0.9"
+colored = "2.0"
