@@ -1,17 +1,26 @@
-mod models;
-mod services;
 mod transaction;
+mod block;
+mod blockchain;
 
-use services::blockchain::Blockchain;
+use blockchain::Blockchain;
 use transaction::Transaction;
 
 fn main() {
-    println!("Welcome to the Mani cryptocurrency!");
-
     let mut blockchain = Blockchain::new();
-    let transaction = Transaction::new(String::from("Alice"), String::from("Bob"), 50.0);
-    println!("{}", transaction.details());
-    blockchain.add_block(vec![transaction]);
+
+    let transaction1 = Transaction {
+        sender: String::from("Alice"),
+        receiver: String::from("Bob"),
+        amount: 50,
+    };
+
+    let transaction2 = Transaction {
+        sender: String::from("Bob"),
+        receiver: String::from("Charlie"),
+        amount: 30,
+    };
+
+    blockchain.add_block(vec![transaction1, transaction2]);
 
     blockchain.display();
 }

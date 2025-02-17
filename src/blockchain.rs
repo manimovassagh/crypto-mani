@@ -1,4 +1,4 @@
-use crate::models::block::Block;
+use crate::block::Block;
 use crate::transaction::Transaction;
 
 #[derive(Debug)]

@@ -1,27 +1,14 @@
-use std::time::{SystemTime, UNIX_EPOCH};
+use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Transaction {
     pub sender: String,
     pub receiver: String,
-    pub amount: f64,
-    pub timestamp: u128,
+    pub amount: u64,
 }
 
 impl Transaction {
-    pub fn new(sender: String, receiver: String, amount: f64) -> Self {
-        Transaction {
-            sender,
-            receiver,
-            amount,
-            timestamp: SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_millis(),
-        }
-    }
-
     pub fn details(&self) -> String {
-        format!(
-            "Transaction from {} to {} of amount {} at {}",
-            self.sender, self.receiver, self.amount, self.timestamp
-        )
+        format!("{} -> {}: {}", self.sender, self.receiver, self.amount)
     }
 }
